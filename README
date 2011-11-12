@@ -1,0 +1,28 @@
+This is my entry in Instagram's Engineering Challenge: The Unshredder, found at http://instagram-engineering.tumblr.com/post/12651721845/instagram-engineering-challenge-the-unshredder
+
+Dependencies
+===
+
+Ruby 1.9.x
+RMagick
+
+It's possible that it will run on Ruby 1.8.x (I stayed away from most 1.9 features) though you will have to require rubygems.
+
+
+Usage
+===
+
+$ ruby deshredder.rb infile.png
+...some output...
+
+This will produce out.png as output.
+
+
+Implementation Notes
+===
+
+I thought that I might be able to sew the shreds back together by figuring out how far apart the various RGB values were for each pixel. In the end this turned out to be the solution I am submitting though I went through several iterations of comparing pixel red blue and green values before noticing Pixel#fcmp in the RMagick documentation.
+
+My arrange_shreds function is somewhat naive and as you stated in your blog post, it probably won't work for images that have repeating patterns or images that are very similar. It is pretty well-commented so you can refer to the script and the puts calls to see what's happening.
+
+As far as the bonus challenge goes, I suspect that adding detection for column width wouldn't be a huge leap - using the same Pixel#fcmp you could find the points of biggest discontinuity in a single row and confirm by performing it over multiple rows.
